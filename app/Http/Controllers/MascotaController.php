@@ -27,7 +27,18 @@ class MascotaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validar los datos del formulario
+        $validated = $request->validate([
+            'nombre' => 'required|string|max:255',
+            'especie' => 'required|string|max:255',
+            'descripcion' => 'nullable|string',
+            'foto' => 'nullable|file|mimes:jpg,jpeg,png|max:2048',
+            'fecha_nacimiento' => 'nullable|date',
+        ]);
+
+        // Guardar la mascota en la base de datos
+
+        // Redirigir al usuario a la lista de mascotas
     }
 
     /**
