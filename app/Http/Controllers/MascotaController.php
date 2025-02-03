@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Mascota;
 
 class MascotaController extends Controller
 {
@@ -11,7 +12,9 @@ class MascotaController extends Controller
      */
     public function index()
     {
-        //
+        $mascotas = Mascota::all();
+
+        return view('mascotas.index', compact('mascotas'));
     }
 
     /**
@@ -37,8 +40,9 @@ class MascotaController extends Controller
         ]);
 
         // Guardar la mascota en la base de datos
-
+        Mascota::create($validated);
         // Redirigir al usuario a la lista de mascotas
+        return redirect()->route('mascotas.index');
     }
 
     /**
@@ -54,7 +58,9 @@ class MascotaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $mascota = Mascota::findOrFail($id);
+
+        return view('mascotas.edit', compact('mascota'));
     }
 
     /**
@@ -70,6 +76,13 @@ class MascotaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Buscar la mascota por su ID
+        $mascota = Mascota::findOrFail($id);
+
+        // Eliminar la mascota
+        $mascota->delete();
+
+        // Redirigir al usuario a la lista de mascotas
+        return redirect()->route('mascotas.index')->with('success', 'Mascota eliminada correctamente.');
     }
 }
