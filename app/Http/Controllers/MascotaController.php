@@ -39,6 +39,11 @@ class MascotaController extends Controller
             'fecha_nacimiento' => 'nullable|date',
         ]);
 
+        // Subir la foto de la mascota
+        if ($request->hasFile('foto')) {
+            $validated['foto'] = $request->file('foto')->store('fotos', 'public');
+        }
+
         // Guardar la mascota en la base de datos
         Mascota::create($validated);
         // Redirigir al usuario a la lista de mascotas
@@ -68,7 +73,23 @@ class MascotaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Validar los datos del formulario
+        $validated = $request->validate([
+            'nombre' => 'required|string|max:255',
+            'especie' => 'required|string|max:255',
+            'descripcion' => 'nullable|string',
+            'foto' => 'nullable|file|mimes:jpg,jpeg,png|max:2048',
+            'fecha_nacimiento' => 'nullable|date',
+        ]);
+
+        // Buscar la mascota por su ID
+        $mascota = Mascota::findOrFail($id);
+
+        // Actualizar los datos de la mascota
+        $mascota->update($validated);
+
+        // Redirigir al usuario a la lista de mascotas
+        return redirect()->route('mascotas.index')->with('success', 'Mascota actualizada correctamente.');
     }
 
     /**
