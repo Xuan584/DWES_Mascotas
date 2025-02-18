@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Mascotas</title>
-</head>
-<body>
-    @if (session('success')) 
-        <p style="color: green;">{{ session('success') }}</p>
-    @endif
+
+<x-my-layout2>
     <h1>Lista de Mascotas</h1>
 
-    <table>
+        <table>
         <thead>
             <tr>
                 <th>Imagen</th>
@@ -54,5 +45,4 @@
             @endforeach
         </tbody>
     </table>
-</body>
-</html>
+</x-my-layout2>
