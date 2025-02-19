@@ -1,5 +1,5 @@
 
-<x-my-layout2>
+<x-app-layout>
     <h1>Lista de Mascotas</h1>
 
         <table>
@@ -45,4 +45,4 @@
             @endforeach
         </tbody>
     </table>
-</x-my-layout2>
+</x-app-layout>
