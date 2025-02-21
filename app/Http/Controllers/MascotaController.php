@@ -14,6 +14,7 @@ class MascotaController extends Controller
     public function index()
     {
         $mascotas = Mascota::all();
+        $mascotas = Mascota::paginate(5);
 
         return view('mascotas.index', compact('mascotas'));
     }
