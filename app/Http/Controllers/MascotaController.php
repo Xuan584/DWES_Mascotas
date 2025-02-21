@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Mascota;
+use Illuminate\Support\Facades\Auth;
 
 class MascotaController extends Controller
 {
@@ -44,6 +45,8 @@ class MascotaController extends Controller
             $validated['foto'] = $request->file('foto')->store('fotos', 'public');
         }
 
+        $validated['user_id'] = request()->user()->id;
+
         // Guardar la mascota en la base de datos
         Mascota::create($validated);
         // Redirigir al usuario a la lista de mascotas
@@ -64,6 +67,11 @@ class MascotaController extends Controller
     public function edit(string $id)
     {
         $mascota = Mascota::findOrFail($id);
+
+        if(!$mascota->user_id !== Auth::user()) {
+            abort(403, 'No tienes permiso para editar esta mascota.');
+            return redirect()->route('mascotas.index');
+        }
 
         return view('mascotas.edit', compact('mascota'));
     }

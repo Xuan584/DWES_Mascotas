@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use function Laravel\Prompts\table;
+
 return new class extends Migration
 {
     /**
@@ -13,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('mascotas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->onDelete('cascade')->constrained('users');
             $table->string('nombre');
             $table->string('especie');
             $table->string('descripcion')->nullable();
