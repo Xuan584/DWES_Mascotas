@@ -37,5 +37,7 @@ class MascotaSeeder extends Seeder
             "fecha_nacimiento" => "2024-01-03",
             'user_id' => 2
         ]);
+
+        Mascota::factory(20)->create();
     }
 }

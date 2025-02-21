@@ -17,10 +17,11 @@ class MascotaFactory extends Factory
     public function definition(): array
     {
         return [
-            'nombre' => $this->fake()->firstName(),
-            'raza' => $this->fake()->randomElement(['Perro', 'Gato', 'Tortuga']),
+            'nombre' => fake()->firstName(),
+            'especie' => fake()->randomElement(['Perro', 'Gato', 'Tortuga']),
             'descripcion' => "Descripción de muestra",
-            'fecha_nacimiento' => $this->fake()->dateTimeBetween('-10 years', 'now')->format('Y-m-d')
+            'fecha_nacimiento' => fake()->dateTimeBetween('-10 years', 'now')->format('Y-m-d'),
+            'user_id' => fake()->numberBetween(3, 7)
         ];
     }
 }
