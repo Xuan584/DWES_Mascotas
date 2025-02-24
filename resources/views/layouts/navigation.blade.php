@@ -21,11 +21,13 @@
                         {{ __('Mascotas') }}
                     </x-nav-link>
                 </div>
+                @auth
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('mascotas.create')" :active="request()->routeIs('mascotas.create')">
                         {{ __('Crear Mascota') }}
                     </x-nav-link>
                 </div>
+                @endauth
             </div>
 
             <!-- Settings Dropdown -->
@@ -87,6 +89,16 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('mascotas.index')" :active="request()->routeIs('mascotas.index')">
+                {{ __('Mascotas') }}
+            </x-responsive-nav-link>
+
+            @auth
+            <x-responsive-nav-link :href="route('mascotas.create')" :active="request()->routeIs('mascotas.create')">
+                {{ __('Crear Mascota') }}
+            </x-responsive-nav-link>
+            @endauth
         </div>
 
         <!-- Responsive Settings Options -->
